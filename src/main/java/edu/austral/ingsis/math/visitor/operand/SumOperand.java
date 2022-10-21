@@ -13,7 +13,6 @@ public class SumOperand implements Function {
         this.f2 = f2;
     }
 
-
     @Override
     public void accept(Visitor visitor) {
         f1.accept(visitor);

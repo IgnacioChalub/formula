@@ -28,8 +28,8 @@ función, por lo tanto es necesario contar con un mecanismo para obtener todas l
 ## Consignas
 
 1. Realice un diagrama de clases, describiendo la solución al problema.
-2. Implemente la solución descripta, en el paquete `edu.austral.ingsis.math`.
-3. Implemente los tests descriptos en el paquete `edu.austral.ingsis.math`.
+2. Implemente la solución descripta, en el paquete `edu.austral.ingsis.visitor`.
+3. Implemente los tests descriptos en el paquete `edu.austral.ingsis.visitor`.
 
 ## Notas
 

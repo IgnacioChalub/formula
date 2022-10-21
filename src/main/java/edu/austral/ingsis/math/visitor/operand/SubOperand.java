@@ -13,6 +13,14 @@ public class SubOperand implements Function {
         this.f2 = f2;
     }
 
+    public Function getF1() {
+        return this.f1;
+    }
+
+    public Function getF2() {
+        return this.f2;
+    }
+
     @Override
     public void accept(Visitor visitor) {
         f1.accept(visitor);
