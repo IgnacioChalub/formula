@@ -1,10 +1,10 @@
 package visitor;
 
-import edu.austral.ingsis.math.composite.Function;
-import edu.austral.ingsis.math.composite.operand.*;
-import edu.austral.ingsis.math.composite.value.Number;
-import edu.austral.ingsis.math.composite.value.Variable;
-import edu.austral.ingsis.math.visitor.visitors.CalculateVisitor;
+import edu.austral.ingsis.math.visitor.Function;
+import edu.austral.ingsis.math.visitor.operand.*;
+import edu.austral.ingsis.math.visitor.value.Number;
+import edu.austral.ingsis.math.visitor.value.Variable;
+import edu.austral.ingsis.math.visitor.visitors.ListVariableVisitor;
 import edu.austral.ingsis.math.visitor.visitors.Visitor;
 import org.junit.Test;
 
@@ -26,7 +26,8 @@ public class ListVariablesTest {
                 new Number(1.0),
                 new Number(6.0)
         );
-        final List<String> result = function.listVariables();
+        final Visitor<List<String>> visitor = new ListVariableVisitor();
+        final List<String> result = visitor.start(function);
 
         assertThat(result, empty());
     }
@@ -41,7 +42,8 @@ public class ListVariablesTest {
                 new Variable("div")
         );
 
-        final List<String> result = function.listVariables();
+        final Visitor<List<String>> visitor = new ListVariableVisitor();
+        final List<String> result = visitor.start(function);
 
         assertThat(result, containsInAnyOrder("div"));
     }
@@ -58,7 +60,8 @@ public class ListVariablesTest {
                 ),
                 new Variable("y")
         );
-        final List<String> result = function.listVariables();
+        final Visitor<List<String>> visitor = new ListVariableVisitor();
+        final List<String> result = visitor.start(function);
 
         assertThat(result, containsInAnyOrder("x", "y"));
     }
@@ -75,7 +78,8 @@ public class ListVariablesTest {
                 ),
                 new Variable("b")
         );
-        final List<String> result = function.listVariables();
+        final Visitor<List<String>> visitor = new ListVariableVisitor();
+        final List<String> result = visitor.start(function);
 
         assertThat(result, containsInAnyOrder("a", "b"));
     }
@@ -89,7 +93,8 @@ public class ListVariablesTest {
                 new Variable("z"),
                 new Number(0.5)
         );
-        final List<String> result = function.listVariables();
+        final Visitor<List<String>> visitor = new ListVariableVisitor();
+        final List<String> result = visitor.start(function);
 
         assertThat(result, containsInAnyOrder("z"));
     }
@@ -105,7 +110,8 @@ public class ListVariablesTest {
                 ),
                 new Number(8.0)
         );
-        final List<String> result = function.listVariables();
+        final Visitor<List<String>> visitor = new ListVariableVisitor();
+        final List<String> result = visitor.start(function);
 
         assertThat(result, containsInAnyOrder("value"));
     }
@@ -121,7 +127,8 @@ public class ListVariablesTest {
                 ),
                 new Number(8.0)
         );
-        final List<String> result = function.listVariables();
+        final Visitor<List<String>> visitor = new ListVariableVisitor();
+        final List<String> result = visitor.start(function);
 
         assertThat(result, containsInAnyOrder("value"));
     }
@@ -138,7 +145,8 @@ public class ListVariablesTest {
                 ),
                 new Number(8.0)
         );
-        final List<String> result = function.listVariables();
+        final Visitor<List<String>> visitor = new ListVariableVisitor();
+        final List<String> result = visitor.start(function);
 
         assertThat(result, containsInAnyOrder("i"));
     }
