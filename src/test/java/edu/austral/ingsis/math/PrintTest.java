@@ -1,5 +1,9 @@
 package edu.austral.ingsis.math;
 
+import edu.austral.ingsis.math.composite.Function;
+import edu.austral.ingsis.math.composite.operand.*;
+import edu.austral.ingsis.math.composite.value.Number;
+import edu.austral.ingsis.math.composite.value.Variable;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -12,8 +16,12 @@ public class PrintTest {
      */
     @Test
     public void shouldPrintFunction1() {
+        final Function function = new SumOperand(
+                new Number(1.0),
+                new Number(6.0)
+        );
         final String expected = "1 + 6";
-        final String result = expected;
+        final String result = function.toString();
 
         assertThat(result, equalTo(expected));
     }
@@ -23,8 +31,12 @@ public class PrintTest {
      */
     @Test
     public void shouldPrintFunction2() {
+        final Function function = new DivOperand(
+                new Number(12.0),
+                new Number(2.0)
+        );
         final String expected = "12 / 2";
-        final String result = expected;
+        final String result = function.toString();
 
         assertThat(result, equalTo(expected));
     }
@@ -34,8 +46,17 @@ public class PrintTest {
      */
     @Test
     public void shouldPrintFunction3() {
+        final Function function = new MultOperand(
+                new Parenthesis(
+                        new DivOperand(
+                                new Number(9.0),
+                                new Number(2.0)
+                        )
+                ),
+                new Number(3.0)
+        );
         final String expected = "(9 / 2) * 3";
-        final String result = expected;
+        final String result = function.toString();
 
         assertThat(result, equalTo(expected));
     }
@@ -45,6 +66,15 @@ public class PrintTest {
      */
     @Test
     public void shouldPrintFunction4() {
+        final Function function = new PowerOperand(
+                new Parenthesis(
+                        new DivOperand(
+                                new Number(27.0),
+                                new Number(6.0)
+                        )
+                ),
+                new Number(2.0)
+        );
         final String expected = "(27 / 6) ^ 2";
         final String result = expected;
 
@@ -56,8 +86,14 @@ public class PrintTest {
      */
     @Test
     public void shouldPrintFunction6() {
+        final Function function = new SubOperand(
+                new AbsOperand(
+                        new Variable("value")
+                ),
+                new Number(8.0)
+        );
         final String expected = "|value| - 8";
-        final String result = expected;
+        final String result = function.toString();
 
         assertThat(result, equalTo(expected));
     }
@@ -67,8 +103,14 @@ public class PrintTest {
      */
     @Test
     public void shouldPrintFunction7() {
+        final Function function = new SubOperand(
+                new AbsOperand(
+                        new Variable("value")
+                ),
+                new Number(8.0)
+        );
         final String expected = "|value| - 8";
-        final String result = expected;
+        final String result = function.toString();
 
         assertThat(result, equalTo(expected));
     }
@@ -78,6 +120,15 @@ public class PrintTest {
      */
     @Test
     public void shouldPrintFunction8() {
+        final Function function = new MultOperand(
+                new Parenthesis(
+                        new SubOperand(
+                                new Number(5.0),
+                                new Variable("i")
+                        )
+                ),
+                new Number(8.0)
+        );
         final String expected = "(5 - i) * 8";
         final String result = expected;
 

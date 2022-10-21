@@ -1,11 +1,13 @@
 package edu.austral.ingsis.math;
 
+import edu.austral.ingsis.math.composite.Function;
+import edu.austral.ingsis.math.composite.operand.*;
+import edu.austral.ingsis.math.composite.value.Number;
+import edu.austral.ingsis.math.composite.value.Variable;
 import org.junit.Test;
 
-import java.util.Collections;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
@@ -17,7 +19,11 @@ public class ListVariablesTest {
      */
     @Test
     public void shouldListVariablesFunction1() {
-        final List<String> result = Collections.emptyList();
+        final Function function = new SumOperand(
+                new Number(1.0),
+                new Number(6.0)
+        );
+        final List<String> result = function.listVariables();
 
         assertThat(result, empty());
     }
@@ -27,7 +33,12 @@ public class ListVariablesTest {
      */
     @Test
     public void shouldListVariablesFunction2() {
-        final List<String> result = Collections.emptyList();
+        final Function function = new DivOperand(
+                new Number(12.0),
+                new Variable("div")
+        );
+
+        final List<String> result = function.listVariables();
 
         assertThat(result, containsInAnyOrder("div"));
     }
@@ -37,7 +48,14 @@ public class ListVariablesTest {
      */
     @Test
     public void shouldListVariablesFunction3() {
-        final List<String> result = Collections.emptyList();
+        final Function function = new MultOperand(
+                new DivOperand(
+                        new Number(9.0),
+                        new Variable("x")
+                ),
+                new Variable("y")
+        );
+        final List<String> result = function.listVariables();
 
         assertThat(result, containsInAnyOrder("x", "y"));
     }
@@ -47,7 +65,14 @@ public class ListVariablesTest {
      */
     @Test
     public void shouldListVariablesFunction4() {
-        final List<String> result = Collections.emptyList();
+        final Function function = new PowerOperand(
+                new DivOperand(
+                        new Number(27.0),
+                        new Variable("a")
+                ),
+                new Variable("b")
+        );
+        final List<String> result = function.listVariables();
 
         assertThat(result, containsInAnyOrder("a", "b"));
     }
@@ -57,7 +82,11 @@ public class ListVariablesTest {
      */
     @Test
     public void shouldListVariablesFunction5() {
-        final List<String> result = Collections.emptyList();
+        final Function function = new PowerOperand(
+                new Variable("z"),
+                new Number(0.5)
+        );
+        final List<String> result = function.listVariables();
 
         assertThat(result, containsInAnyOrder("z"));
     }
@@ -67,7 +96,13 @@ public class ListVariablesTest {
      */
     @Test
     public void shouldListVariablesFunction6() {
-        final List<String> result = Collections.emptyList();
+        final Function function = new SubOperand(
+                new AbsOperand(
+                        new Variable("value")
+                ),
+                new Number(8.0)
+        );
+        final List<String> result = function.listVariables();
 
         assertThat(result, containsInAnyOrder("value"));
     }
@@ -77,7 +112,13 @@ public class ListVariablesTest {
      */
     @Test
     public void shouldListVariablesFunction7() {
-        final List<String> result = Collections.emptyList();
+        final Function function = new SubOperand(
+                new AbsOperand(
+                        new Variable("value")
+                ),
+                new Number(8.0)
+        );
+        final List<String> result = function.listVariables();
 
         assertThat(result, containsInAnyOrder("value"));
     }
@@ -87,7 +128,14 @@ public class ListVariablesTest {
      */
     @Test
     public void shouldListVariablesFunction8() {
-        final List<String> result = Collections.emptyList();
+        final Function function = new MultOperand(
+                new SubOperand(
+                        new Number(5.0),
+                        new Variable("i")
+                ),
+                new Number(8.0)
+        );
+        final List<String> result = function.listVariables();
 
         assertThat(result, containsInAnyOrder("i"));
     }
