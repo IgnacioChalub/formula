@@ -1,9 +1,11 @@
 package visitor;
 
-import edu.austral.ingsis.math.composite.Function;
-import edu.austral.ingsis.math.composite.operand.*;
-import edu.austral.ingsis.math.composite.value.Number;
-import edu.austral.ingsis.math.composite.value.Variable;
+import edu.austral.ingsis.math.visitor.Function;
+import edu.austral.ingsis.math.visitor.operand.*;
+import edu.austral.ingsis.math.visitor.value.Number;
+import edu.austral.ingsis.math.visitor.value.Variable;
+import edu.austral.ingsis.math.visitor.visitors.PrintVisitor;
+import edu.austral.ingsis.math.visitor.visitors.Visitor;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -21,7 +23,8 @@ public class PrintTest {
                 new Number(6.0)
         );
         final String expected = "1 + 6";
-        final String result = function.toString();
+        final Visitor<String> visitor = new PrintVisitor();
+        final String result = visitor.start(function);
 
         assertThat(result, equalTo(expected));
     }
@@ -36,7 +39,8 @@ public class PrintTest {
                 new Number(2.0)
         );
         final String expected = "12 / 2";
-        final String result = function.toString();
+        final Visitor<String> visitor = new PrintVisitor();
+        final String result = visitor.start(function);
 
         assertThat(result, equalTo(expected));
     }
@@ -56,7 +60,8 @@ public class PrintTest {
                 new Number(3.0)
         );
         final String expected = "(9 / 2) * 3";
-        final String result = function.toString();
+        final Visitor<String> visitor = new PrintVisitor();
+        final String result = visitor.start(function);
 
         assertThat(result, equalTo(expected));
     }
@@ -76,7 +81,8 @@ public class PrintTest {
                 new Number(2.0)
         );
         final String expected = "(27 / 6) ^ 2";
-        final String result = expected;
+        final Visitor<String> visitor = new PrintVisitor();
+        final String result = visitor.start(function);
 
         assertThat(result, equalTo(expected));
     }
@@ -93,7 +99,8 @@ public class PrintTest {
                 new Number(8.0)
         );
         final String expected = "|value| - 8";
-        final String result = function.toString();
+        final Visitor<String> visitor = new PrintVisitor();
+        final String result = visitor.start(function);
 
         assertThat(result, equalTo(expected));
     }
@@ -110,7 +117,8 @@ public class PrintTest {
                 new Number(8.0)
         );
         final String expected = "|value| - 8";
-        final String result = function.toString();
+        final Visitor<String> visitor = new PrintVisitor();
+        final String result = visitor.start(function);
 
         assertThat(result, equalTo(expected));
     }
@@ -130,7 +138,8 @@ public class PrintTest {
                 new Number(8.0)
         );
         final String expected = "(5 - i) * 8";
-        final String result = expected;
+        final Visitor<String> visitor = new PrintVisitor();
+        final String result = visitor.start(function);
 
         assertThat(result, equalTo(expected));
     }

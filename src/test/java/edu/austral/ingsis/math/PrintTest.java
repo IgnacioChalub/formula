@@ -76,7 +76,7 @@ public class PrintTest {
                 new Number(2.0)
         );
         final String expected = "(27 / 6) ^ 2";
-        final String result = expected;
+        final String result = function.toString();
 
         assertThat(result, equalTo(expected));
     }
@@ -130,7 +130,7 @@ public class PrintTest {
                 new Number(8.0)
         );
         final String expected = "(5 - i) * 8";
-        final String result = expected;
+        final String result = function.toString();
 
         assertThat(result, equalTo(expected));
     }
