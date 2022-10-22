@@ -14,7 +14,12 @@ public class Parenthesis implements Function {
 
     @Override
     public void accept(Visitor visitor) {
-        f1.accept(visitor);
+//        f1.accept(visitor);
         visitor.visitParenthesis(this);
     }
+
+    public Function getF1() {
+        return f1;
+    }
+
 }

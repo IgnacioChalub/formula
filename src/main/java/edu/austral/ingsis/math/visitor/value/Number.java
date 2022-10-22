@@ -4,9 +4,6 @@ package edu.austral.ingsis.math.visitor.value;
 import edu.austral.ingsis.math.visitor.Function;
 import edu.austral.ingsis.math.visitor.visitors.Visitor;
 
-import java.util.List;
-import java.util.Map;
-
 public class Number implements Function {
 
     private final Double number;

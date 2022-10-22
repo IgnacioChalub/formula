@@ -5,82 +5,94 @@ import edu.austral.ingsis.math.visitor.operand.*;
 import edu.austral.ingsis.math.visitor.value.Number;
 import edu.austral.ingsis.math.visitor.value.Variable;
 
-import java.util.Stack;
-
 public class PrintVisitor implements Visitor<String> {
 
-    private final Stack<String> stack;
+    private String soFar;
 
     public PrintVisitor() {
-        this.stack = new Stack<>();
     }
 
     @Override
     public String start(Function function) {
         function.accept(this);
-        return stack.pop();
+        return soFar;
     }
 
     @Override
     public void visitAbs(AbsOperand operand) {
-        final String soFar = stack.pop();
-        stack.push("|" + soFar + "|");
+        final PrintVisitor f1Visitor = new PrintVisitor();
+        operand.getF1().accept(f1Visitor);
+        this.soFar = "|" + f1Visitor.getSoFar() + "|";
     }
 
     @Override
     public void visitDiv(DivOperand operand) {
-        final String right = stack.pop();
-        final String left = stack.pop();
-        stack.push(left + " / " + right);
+        final PrintVisitor f1Visitor = new PrintVisitor();
+        final PrintVisitor f2Visitor = new PrintVisitor();
+        operand.getF1().accept(f1Visitor);
+        operand.getF2().accept(f2Visitor);
+        this.soFar = f1Visitor.getSoFar() + " / " + f2Visitor.getSoFar();
     }
 
     @Override
     public void visitMult(MultOperand operand) {
-        final String right = stack.pop();
-        final String left = stack.pop();
-        stack.push(left + " * " + right);
+        final PrintVisitor f1Visitor = new PrintVisitor();
+        final PrintVisitor f2Visitor = new PrintVisitor();
+        operand.getF1().accept(f1Visitor);
+        operand.getF2().accept(f2Visitor);
+        this.soFar = f1Visitor.getSoFar() + " * " + f2Visitor.getSoFar();
     }
 
     @Override
     public void visitParenthesis(Parenthesis operand) {
-       final String soFar = stack.pop();
-       stack.push("(" + soFar + ")");
+        final PrintVisitor f1Visitor = new PrintVisitor();
+        operand.getF1().accept(f1Visitor);
+        this.soFar = "(" + f1Visitor.getSoFar() + ")";
     }
 
     @Override
     public void visitPower(PowerOperand operand) {
-        final String right = stack.pop();
-        final String left = stack.pop();
-        stack.push(left + " ^ " + right);
+        final PrintVisitor f1Visitor = new PrintVisitor();
+        final PrintVisitor f2Visitor = new PrintVisitor();
+        operand.getF1().accept(f1Visitor);
+        operand.getF2().accept(f2Visitor);
+        this.soFar = f1Visitor.getSoFar() + " ^ " + f2Visitor.getSoFar();
     }
 
     @Override
     public void visitSub(SubOperand operand) {
-        final String right = stack.pop();
-        final String left = stack.pop();
-        stack.push(left + " - " + right);
+        final PrintVisitor f1Visitor = new PrintVisitor();
+        final PrintVisitor f2Visitor = new PrintVisitor();
+        operand.getF1().accept(f1Visitor);
+        operand.getF2().accept(f2Visitor);
+        this.soFar = f1Visitor.getSoFar() + " - " + f2Visitor.getSoFar();
     }
 
     @Override
     public void visitSum(SumOperand operand) {
-        final String right = stack.pop();
-        final String left = stack.pop();
-        stack.push(left + " + " + right);
+        final PrintVisitor f1Visitor = new PrintVisitor();
+        final PrintVisitor f2Visitor = new PrintVisitor();
+        operand.getF1().accept(f1Visitor);
+        operand.getF2().accept(f2Visitor);
+        this.soFar = f1Visitor.getSoFar() + " + " + f2Visitor.getSoFar();
     }
 
     @Override
     public void visitNumber(Number operand) {
         final Double number = operand.getNumber();
         if(number % 1 == 0) {
-            stack.push(((Integer) number.intValue()).toString());
+            this.soFar = ((Integer) number.intValue()).toString();
         }else{
-            stack.push(number.toString());
+           this.soFar = number.toString();
         }
     }
 
     @Override
     public void visitVariable(Variable operand) {
-        stack.push(operand.getVariable());
+        this.soFar = operand.getVariable();
     }
 
+    public String getSoFar() {
+        return this.soFar;
+    }
 }

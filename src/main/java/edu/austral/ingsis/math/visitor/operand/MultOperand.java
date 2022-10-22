@@ -15,8 +15,16 @@ public class MultOperand implements Function {
 
     @Override
     public void accept(Visitor visitor) {
-        f1.accept(visitor);
-        f2.accept(visitor);
+//        f1.accept(visitor);
+//        f2.accept(visitor);
         visitor.visitMult(this);
+    }
+
+    public Function getF1() {
+        return f1;
+    }
+
+    public Function getF2() {
+        return f2;
     }
 }
