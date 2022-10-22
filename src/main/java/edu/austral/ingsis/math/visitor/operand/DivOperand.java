@@ -15,8 +15,6 @@ public class DivOperand implements Function {
 
     @Override
     public void accept(Visitor visitor) {
-//        f1.accept(visitor);
-//        f2.accept(visitor);
         visitor.visitDiv(this);
     }
 

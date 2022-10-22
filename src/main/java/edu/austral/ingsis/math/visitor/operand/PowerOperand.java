@@ -16,8 +16,6 @@ public class PowerOperand implements Function {
 
     @Override
     public void accept(Visitor visitor) {
-//        f1.accept(visitor);
-//        f2.accept(visitor);
         visitor.visitPower(this);
     }
 

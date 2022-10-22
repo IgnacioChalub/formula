@@ -15,8 +15,6 @@ public class SubOperand implements Function {
 
     @Override
     public void accept(Visitor visitor) {
-//        f1.accept(visitor);
-//        f2.accept(visitor);
         visitor.visitSub(this);
     }
 

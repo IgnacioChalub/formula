@@ -14,7 +14,6 @@ public class AbsOperand implements Function {
 
     @Override
     public void accept(Visitor visitor) {
-//        f1.accept(visitor);
         visitor.visitAbs(this);
     }
 
