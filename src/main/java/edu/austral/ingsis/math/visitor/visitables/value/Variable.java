@@ -1,11 +1,12 @@
-package edu.austral.ingsis.math.visitor.value;
+package edu.austral.ingsis.math.visitor.visitables.value;
 
 
 import edu.austral.ingsis.math.visitor.Function;
+import edu.austral.ingsis.math.visitor.visitables.Visitable;
 import edu.austral.ingsis.math.visitor.visitors.Visitor;
 
 
-public class Variable implements Function {
+public class Variable implements Function, Visitable {
 
     private final String variable;
 

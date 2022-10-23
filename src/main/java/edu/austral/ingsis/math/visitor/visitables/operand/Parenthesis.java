@@ -1,10 +1,11 @@
-package edu.austral.ingsis.math.visitor.operand;
+package edu.austral.ingsis.math.visitor.visitables.operand;
 
 
 import edu.austral.ingsis.math.visitor.Function;
+import edu.austral.ingsis.math.visitor.visitables.Visitable;
 import edu.austral.ingsis.math.visitor.visitors.Visitor;
 
-public class Parenthesis implements Function {
+public class Parenthesis implements Function, Visitable {
 
     private final Function f1;
 

@@ -1,8 +1,8 @@
 package edu.austral.ingsis.math.visitor.visitors;
 
-import edu.austral.ingsis.math.visitor.operand.*;
-import edu.austral.ingsis.math.visitor.value.Number;
-import edu.austral.ingsis.math.visitor.value.Variable;
+import edu.austral.ingsis.math.visitor.visitables.operand.*;
+import edu.austral.ingsis.math.visitor.visitables.value.Number;
+import edu.austral.ingsis.math.visitor.visitables.value.Variable;
 
 import java.util.Map;
 
