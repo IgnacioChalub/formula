@@ -1,6 +1,5 @@
 package edu.austral.ingsis.math.visitor.visitors;
 
-import edu.austral.ingsis.math.visitor.Function;
 import edu.austral.ingsis.math.visitor.operand.*;
 import edu.austral.ingsis.math.visitor.value.Number;
 import edu.austral.ingsis.math.visitor.value.Variable;
@@ -17,83 +16,48 @@ public class CalculateVisitor implements Visitor<Double> {
     }
 
     @Override
-    public Double start(Function function) {
-        function.accept(this);
-        return result;
+    public Double visitAbs(AbsOperand operand) {
+        return Math.abs(operand.getF1().accept(this));
     }
 
     @Override
-    public void visitAbs(AbsOperand operand) {
-        final CalculateVisitor f1Visitor = new CalculateVisitor(variableValues);
-        operand.getF1().accept(f1Visitor);
-        this.result = Math.abs(f1Visitor.getResult());
+    public Double visitDiv(DivOperand operand) {
+        return operand.getF1().accept(this) / operand.getF2().accept(this);
     }
 
     @Override
-    public void visitDiv(DivOperand operand) {
-        final CalculateVisitor f1Visitor = new CalculateVisitor(variableValues);
-        final CalculateVisitor f2Visitor = new CalculateVisitor(variableValues);
-        operand.getF1().accept(f1Visitor);
-        operand.getF2().accept(f2Visitor);
-        this.result = f1Visitor.getResult()/f2Visitor.getResult();
-
+    public Double visitMult(MultOperand operand) {
+        return operand.getF1().accept(this) * operand.getF2().accept(this);
     }
 
     @Override
-    public void visitMult(MultOperand operand) {
-        final CalculateVisitor f1Visitor = new CalculateVisitor(variableValues);
-        final CalculateVisitor f2Visitor = new CalculateVisitor(variableValues);
-        operand.getF1().accept(f1Visitor);
-        operand.getF2().accept(f2Visitor);
-        this.result = f1Visitor.getResult()*f2Visitor.getResult();
+    public Double visitParenthesis(Parenthesis operand) {
+        return operand.getF1().accept(this);
     }
 
     @Override
-    public void visitParenthesis(Parenthesis operand) {
-        final CalculateVisitor f1Visitor = new CalculateVisitor(variableValues);
-        operand.getF1().accept(f1Visitor);
-        this.result = f1Visitor.getResult();
+    public Double visitPower(PowerOperand operand) {
+        return Math.pow(operand.getF1().accept(this), operand.getF2().accept(this));
     }
 
     @Override
-    public void visitPower(PowerOperand operand) {
-        final CalculateVisitor f1Visitor = new CalculateVisitor(variableValues);
-        final CalculateVisitor f2Visitor = new CalculateVisitor(variableValues);
-        operand.getF1().accept(f1Visitor);
-        operand.getF2().accept(f2Visitor);
-        this.result = Math.pow(f1Visitor.getResult(), f2Visitor.getResult());
+    public Double visitSub(SubOperand operand) {
+        return operand.getF1().accept(this) - operand.getF2().accept(this);
     }
 
     @Override
-    public void visitSub(SubOperand operand) {
-        final CalculateVisitor f1Visitor = new CalculateVisitor(variableValues);
-        final CalculateVisitor f2Visitor = new CalculateVisitor(variableValues);
-        operand.getF1().accept(f1Visitor);
-        operand.getF2().accept(f2Visitor);
-        this.result = f1Visitor.getResult()-f2Visitor.getResult();
+    public Double visitSum(SumOperand operand) {
+        return operand.getF1().accept(this) + operand.getF2().accept(this);
     }
 
     @Override
-    public void visitSum(SumOperand operand) {
-        final CalculateVisitor f1Visitor = new CalculateVisitor(variableValues);
-        final CalculateVisitor f2Visitor = new CalculateVisitor(variableValues);
-        operand.getF1().accept(f1Visitor);
-        operand.getF2().accept(f2Visitor);
-        this.result = f1Visitor.getResult()+f2Visitor.getResult();
+    public Double visitNumber(Number operand) {
+        return operand.getNumber();
     }
 
     @Override
-    public void visitNumber(Number operand) {
-        this.result = operand.getNumber();
-    }
-
-    @Override
-    public void visitVariable(Variable operand) {
-        this.result = this.variableValues.get(operand.getVariable());
-    }
-
-    public Double getResult() {
-        return result;
+    public Double visitVariable(Variable operand) {
+        return this.variableValues.get(operand.getVariable());
     }
 
 }

@@ -26,7 +26,7 @@ public class ResolutionTest {
                 new Number(6.0)
         );
         final Visitor<Double> visitor = new CalculateVisitor(Map.of());
-        final Double result = visitor.start(function);
+        final Double result = function.accept(visitor);
 
         assertThat(result, equalTo(7d));
     }
@@ -41,7 +41,7 @@ public class ResolutionTest {
                 new Number(2.0)
         );
         final Visitor<Double> visitor = new CalculateVisitor(Map.of());
-        final Double result = visitor.start(function);
+        final Double result = function.accept(visitor);
 
         assertThat(result, equalTo(6d));
     }
@@ -59,7 +59,7 @@ public class ResolutionTest {
                 new Number(3.0)
         );
         final Visitor<Double> visitor = new CalculateVisitor(Map.of());
-        final Double result = visitor.start(function);
+        final Double result = function.accept(visitor);
 
         assertThat(result, equalTo(13.5d));
     }
@@ -77,7 +77,7 @@ public class ResolutionTest {
                 new Number(2.0)
         );
         final Visitor<Double> visitor = new CalculateVisitor(Map.of());
-        final Double result = visitor.start(function);
+        final Double result = function.accept(visitor);
 
         assertThat(result, equalTo(20.25d));
     }
@@ -92,7 +92,7 @@ public class ResolutionTest {
                 new Number(0.5)
         );
         final Visitor<Double> visitor = new CalculateVisitor(Map.of());
-        final Double result = visitor.start(function);
+        final Double result = function.accept(visitor);
 
         assertThat(result, equalTo(6d));
     }
@@ -106,7 +106,7 @@ public class ResolutionTest {
                 new Number(136.0)
         );
         final Visitor<Double> visitor = new CalculateVisitor(Map.of());
-        final Double result = visitor.start(function);
+        final Double result = function.accept(visitor);
 
         assertThat(result, equalTo(136d));
     }
@@ -120,7 +120,7 @@ public class ResolutionTest {
                 new Number(-136.0)
         );
         final Visitor<Double> visitor = new CalculateVisitor(Map.of());
-        final Double result = visitor.start(function);
+        final Double result = function.accept(visitor);
 
         assertThat(result, equalTo(136d));
     }
@@ -138,7 +138,7 @@ public class ResolutionTest {
                 new Number(8.0)
         );
         final Visitor<Double> visitor = new CalculateVisitor(Map.of());
-        final Double result = visitor.start(function);
+        final Double result = function.accept(visitor);
 
         assertThat(result, equalTo(0d));
     }

@@ -14,8 +14,8 @@ public class SumOperand implements Function {
     }
 
     @Override
-    public void accept(Visitor visitor) {
-        visitor.visitSum(this);
+    public <T> T accept(Visitor<T> visitor) {
+        return visitor.visitSum(this);
     }
 
     public Function getF1() {

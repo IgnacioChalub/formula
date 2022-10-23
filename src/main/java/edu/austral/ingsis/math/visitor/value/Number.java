@@ -13,8 +13,8 @@ public class Number implements Function {
     }
 
     @Override
-    public void accept(Visitor visitor) {
-        visitor.visitNumber(this);
+    public <T> T accept(Visitor<T> visitor) {
+        return visitor.visitNumber(this);
     }
 
     public Double getNumber() {

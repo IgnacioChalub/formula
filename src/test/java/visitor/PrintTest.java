@@ -24,7 +24,7 @@ public class PrintTest {
         );
         final String expected = "1 + 6";
         final Visitor<String> visitor = new PrintVisitor();
-        final String result = visitor.start(function);
+        final String result = function.accept(visitor);
 
         assertThat(result, equalTo(expected));
     }
@@ -40,7 +40,7 @@ public class PrintTest {
         );
         final String expected = "12 / 2";
         final Visitor<String> visitor = new PrintVisitor();
-        final String result = visitor.start(function);
+        final String result = function.accept(visitor);
 
         assertThat(result, equalTo(expected));
     }
@@ -61,7 +61,7 @@ public class PrintTest {
         );
         final String expected = "(9 / 2) * 3";
         final Visitor<String> visitor = new PrintVisitor();
-        final String result = visitor.start(function);
+        final String result = function.accept(visitor);
 
         assertThat(result, equalTo(expected));
     }
@@ -82,7 +82,7 @@ public class PrintTest {
         );
         final String expected = "(27 / 6) ^ 2";
         final Visitor<String> visitor = new PrintVisitor();
-        final String result = visitor.start(function);
+        final String result = function.accept(visitor);
 
         assertThat(result, equalTo(expected));
     }
@@ -100,7 +100,7 @@ public class PrintTest {
         );
         final String expected = "|value| - 8";
         final Visitor<String> visitor = new PrintVisitor();
-        final String result = visitor.start(function);
+        final String result = function.accept(visitor);
 
         assertThat(result, equalTo(expected));
     }
@@ -118,7 +118,7 @@ public class PrintTest {
         );
         final String expected = "|value| - 8";
         final Visitor<String> visitor = new PrintVisitor();
-        final String result = visitor.start(function);
+        final String result = function.accept(visitor);
 
         assertThat(result, equalTo(expected));
     }
@@ -139,7 +139,7 @@ public class PrintTest {
         );
         final String expected = "(5 - i) * 8";
         final Visitor<String> visitor = new PrintVisitor();
-        final String result = visitor.start(function);
+        final String result = function.accept(visitor);
 
         assertThat(result, equalTo(expected));
     }

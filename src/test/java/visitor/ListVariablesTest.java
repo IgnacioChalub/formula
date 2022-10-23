@@ -27,7 +27,7 @@ public class ListVariablesTest {
                 new Number(6.0)
         );
         final Visitor<List<String>> visitor = new ListVariableVisitor();
-        final List<String> result = visitor.start(function);
+        final List<String> result = function.accept(visitor);
 
         assertThat(result, empty());
     }
@@ -43,7 +43,7 @@ public class ListVariablesTest {
         );
 
         final Visitor<List<String>> visitor = new ListVariableVisitor();
-        final List<String> result = visitor.start(function);
+        final List<String> result = function.accept(visitor);
 
         assertThat(result, containsInAnyOrder("div"));
     }
@@ -61,7 +61,7 @@ public class ListVariablesTest {
                 new Variable("y")
         );
         final Visitor<List<String>> visitor = new ListVariableVisitor();
-        final List<String> result = visitor.start(function);
+        final List<String> result = function.accept(visitor);
 
         assertThat(result, containsInAnyOrder("x", "y"));
     }
@@ -79,7 +79,7 @@ public class ListVariablesTest {
                 new Variable("b")
         );
         final Visitor<List<String>> visitor = new ListVariableVisitor();
-        final List<String> result = visitor.start(function);
+        final List<String> result = function.accept(visitor);
 
         assertThat(result, containsInAnyOrder("a", "b"));
     }
@@ -94,7 +94,7 @@ public class ListVariablesTest {
                 new Number(0.5)
         );
         final Visitor<List<String>> visitor = new ListVariableVisitor();
-        final List<String> result = visitor.start(function);
+        final List<String> result = function.accept(visitor);
 
         assertThat(result, containsInAnyOrder("z"));
     }
@@ -111,7 +111,7 @@ public class ListVariablesTest {
                 new Number(8.0)
         );
         final Visitor<List<String>> visitor = new ListVariableVisitor();
-        final List<String> result = visitor.start(function);
+        final List<String> result = function.accept(visitor);
 
         assertThat(result, containsInAnyOrder("value"));
     }
@@ -128,7 +128,7 @@ public class ListVariablesTest {
                 new Number(8.0)
         );
         final Visitor<List<String>> visitor = new ListVariableVisitor();
-        final List<String> result = visitor.start(function);
+        final List<String> result = function.accept(visitor);
 
         assertThat(result, containsInAnyOrder("value"));
     }
@@ -146,7 +146,7 @@ public class ListVariablesTest {
                 new Number(8.0)
         );
         final Visitor<List<String>> visitor = new ListVariableVisitor();
-        final List<String> result = visitor.start(function);
+        final List<String> result = function.accept(visitor);
 
         assertThat(result, containsInAnyOrder("i"));
     }

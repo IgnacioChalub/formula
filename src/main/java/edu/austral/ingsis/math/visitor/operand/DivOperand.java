@@ -14,8 +14,8 @@ public class DivOperand implements Function {
     }
 
     @Override
-    public void accept(Visitor visitor) {
-        visitor.visitDiv(this);
+    public <T> T accept(Visitor<T> visitor) {
+        return visitor.visitDiv(this);
     }
 
     public Function getF1() {
@@ -25,4 +25,5 @@ public class DivOperand implements Function {
     public Function getF2() {
         return f2;
     }
+
 }

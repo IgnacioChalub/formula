@@ -6,14 +6,13 @@ import edu.austral.ingsis.math.visitor.value.Number;
 import edu.austral.ingsis.math.visitor.value.Variable;
 
 public interface Visitor<T> {
-    T start(Function function);
-    void visitAbs(AbsOperand operand);
-    void visitDiv(DivOperand operand);
-    void visitMult(MultOperand operand);
-    void visitParenthesis(Parenthesis operand);
-    void visitPower(PowerOperand operand);
-    void visitSub(SubOperand operand);
-    void visitSum(SumOperand operand);
-    void visitNumber(Number operand);
-    void visitVariable(Variable operand);
+    T visitAbs(AbsOperand operand);
+    T visitDiv(DivOperand operand);
+    T visitMult(MultOperand operand);
+    T visitParenthesis(Parenthesis operand);
+    T visitPower(PowerOperand operand);
+    T visitSub(SubOperand operand);
+    T visitSum(SumOperand operand);
+    T visitNumber(Number operand);
+    T visitVariable(Variable operand);
 }

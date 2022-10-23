@@ -13,11 +13,12 @@ public class AbsOperand implements Function {
     }
 
     @Override
-    public void accept(Visitor visitor) {
-        visitor.visitAbs(this);
+    public <T> T accept(Visitor<T> visitor) {
+        return visitor.visitAbs(this);
     }
 
     public Function getF1() {
         return f1;
     }
+
 }

@@ -14,8 +14,8 @@ public class MultOperand implements Function {
     }
 
     @Override
-    public void accept(Visitor visitor) {
-        visitor.visitMult(this);
+    public <T> T accept(Visitor<T> visitor) {
+        return visitor.visitMult(this);
     }
 
     public Function getF1() {

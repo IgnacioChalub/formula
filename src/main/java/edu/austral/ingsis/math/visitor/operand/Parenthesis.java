@@ -13,8 +13,8 @@ public class Parenthesis implements Function {
     }
 
     @Override
-    public void accept(Visitor visitor) {
-        visitor.visitParenthesis(this);
+    public <T> T accept(Visitor<T> visitor) {
+        return visitor.visitParenthesis(this);
     }
 
     public Function getF1() {

@@ -1,12 +1,13 @@
 package edu.austral.ingsis.math.visitor.visitors;
 
-import edu.austral.ingsis.math.visitor.Function;
 import edu.austral.ingsis.math.visitor.operand.*;
 import edu.austral.ingsis.math.visitor.value.Number;
 import edu.austral.ingsis.math.visitor.value.Variable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ListVariableVisitor implements Visitor<List<String>>{
 
@@ -17,85 +18,50 @@ public class ListVariableVisitor implements Visitor<List<String>>{
     }
 
     @Override
-    public List<String> start(Function function) {
-        function.accept(this);
-        return variables;
+    public List<String> visitAbs(AbsOperand operand) {
+        return operand.getF1().accept(this);
     }
 
     @Override
-    public void visitAbs(AbsOperand operand) {
-        final ListVariableVisitor f1Visitor = new ListVariableVisitor();
-        operand.getF1().accept(f1Visitor);
-        this.variables.addAll(f1Visitor.getVariables());
+    public List<String> visitDiv(DivOperand operand) {
+        return Stream.concat(operand.getF1().accept(this).stream(), operand.getF2().accept(this).stream()).collect(Collectors.toList());
     }
 
     @Override
-    public void visitDiv(DivOperand operand) {
-        final ListVariableVisitor f1Visitor = new ListVariableVisitor();
-        final ListVariableVisitor f2Visitor = new ListVariableVisitor();
-        operand.getF1().accept(f1Visitor);
-        operand.getF2().accept(f2Visitor);
-        this.variables.addAll(f1Visitor.getVariables());
-        this.variables.addAll(f2Visitor.getVariables());
+    public List<String> visitMult(MultOperand operand) {
+        return Stream.concat(operand.getF1().accept(this).stream(), operand.getF2().accept(this).stream()).collect(Collectors.toList());
     }
 
     @Override
-    public void visitMult(MultOperand operand) {
-        final ListVariableVisitor f1Visitor = new ListVariableVisitor();
-        final ListVariableVisitor f2Visitor = new ListVariableVisitor();
-        operand.getF1().accept(f1Visitor);
-        operand.getF2().accept(f2Visitor);
-        this.variables.addAll(f1Visitor.getVariables());
-        this.variables.addAll(f2Visitor.getVariables());
+    public List<String> visitParenthesis(Parenthesis operand) {
+        return operand.getF1().accept(this);
     }
 
     @Override
-    public void visitParenthesis(Parenthesis operand) {
-        final ListVariableVisitor f1Visitor = new ListVariableVisitor();
-        operand.getF1().accept(f1Visitor);
-        this.variables.addAll(f1Visitor.getVariables());
+    public List<String> visitPower(PowerOperand operand) {
+        return Stream.concat(operand.getF1().accept(this).stream(), operand.getF2().accept(this).stream()).collect(Collectors.toList());
     }
 
     @Override
-    public void visitPower(PowerOperand operand) {
-        final ListVariableVisitor f1Visitor = new ListVariableVisitor();
-        final ListVariableVisitor f2Visitor = new ListVariableVisitor();
-        operand.getF1().accept(f1Visitor);
-        operand.getF2().accept(f2Visitor);
-        this.variables.addAll(f1Visitor.getVariables());
-        this.variables.addAll(f2Visitor.getVariables());
+    public List<String> visitSub(SubOperand operand) {
+        return Stream.concat(operand.getF1().accept(this).stream(), operand.getF2().accept(this).stream()).collect(Collectors.toList());
+
     }
 
     @Override
-    public void visitSub(SubOperand operand) {
-        final ListVariableVisitor f1Visitor = new ListVariableVisitor();
-        final ListVariableVisitor f2Visitor = new ListVariableVisitor();
-        operand.getF1().accept(f1Visitor);
-        operand.getF2().accept(f2Visitor);
-        this.variables.addAll(f1Visitor.getVariables());
-        this.variables.addAll(f2Visitor.getVariables());
+    public List<String> visitSum(SumOperand operand) {
+        return Stream.concat(operand.getF1().accept(this).stream(), operand.getF2().accept(this).stream()).collect(Collectors.toList());
+
     }
 
     @Override
-    public void visitSum(SumOperand operand) {
-        final ListVariableVisitor f1Visitor = new ListVariableVisitor();
-        final ListVariableVisitor f2Visitor = new ListVariableVisitor();
-        operand.getF1().accept(f1Visitor);
-        operand.getF2().accept(f2Visitor);
-        this.variables.addAll(f1Visitor.getVariables());
-        this.variables.addAll(f2Visitor.getVariables());
+    public List<String> visitNumber(Number operand) {
+        return List.of();
     }
 
     @Override
-    public void visitNumber(Number operand) {
+    public List<String> visitVariable(Variable operand) {
+        return List.of(operand.getVariable());
     }
 
-    @Override
-    public void visitVariable(Variable operand) {
-        this.variables.add(operand.getVariable());
-    }
-
-    public List<String> getVariables() {
-        return this.variables;
-    }
 }

@@ -14,8 +14,8 @@ public class SubOperand implements Function {
     }
 
     @Override
-    public void accept(Visitor visitor) {
-        visitor.visitSub(this);
+    public <T> T accept(Visitor<T> visitor) {
+        return visitor.visitSub(this);
     }
 
     public Function getF1() {

@@ -7,92 +7,54 @@ import edu.austral.ingsis.math.visitor.value.Variable;
 
 public class PrintVisitor implements Visitor<String> {
 
-    private String soFar;
-
-    public PrintVisitor() {
+    @Override
+    public String visitAbs(AbsOperand operand) {
+        return "|" + operand.getF1().accept(this) + "|";
     }
 
     @Override
-    public String start(Function function) {
-        function.accept(this);
-        return soFar;
+    public String visitDiv(DivOperand operand) {
+        return operand.getF1().accept(this) + " / " + operand.getF2().accept(this);
     }
 
     @Override
-    public void visitAbs(AbsOperand operand) {
-        final PrintVisitor f1Visitor = new PrintVisitor();
-        operand.getF1().accept(f1Visitor);
-        this.soFar = "|" + f1Visitor.getSoFar() + "|";
+    public String visitMult(MultOperand operand) {
+        return operand.getF1().accept(this) + " * " + operand.getF2().accept(this);
     }
 
     @Override
-    public void visitDiv(DivOperand operand) {
-        final PrintVisitor f1Visitor = new PrintVisitor();
-        final PrintVisitor f2Visitor = new PrintVisitor();
-        operand.getF1().accept(f1Visitor);
-        operand.getF2().accept(f2Visitor);
-        this.soFar = f1Visitor.getSoFar() + " / " + f2Visitor.getSoFar();
+    public String visitParenthesis(Parenthesis operand) {
+        return "(" + operand.getF1().accept(this) + ")";
     }
 
     @Override
-    public void visitMult(MultOperand operand) {
-        final PrintVisitor f1Visitor = new PrintVisitor();
-        final PrintVisitor f2Visitor = new PrintVisitor();
-        operand.getF1().accept(f1Visitor);
-        operand.getF2().accept(f2Visitor);
-        this.soFar = f1Visitor.getSoFar() + " * " + f2Visitor.getSoFar();
+    public String visitPower(PowerOperand operand) {
+        return operand.getF1().accept(this) + " ^ " + operand.getF2().accept(this);
     }
 
     @Override
-    public void visitParenthesis(Parenthesis operand) {
-        final PrintVisitor f1Visitor = new PrintVisitor();
-        operand.getF1().accept(f1Visitor);
-        this.soFar = "(" + f1Visitor.getSoFar() + ")";
+    public String visitSub(SubOperand operand) {
+        return operand.getF1().accept(this) + " - " + operand.getF2().accept(this);
     }
 
     @Override
-    public void visitPower(PowerOperand operand) {
-        final PrintVisitor f1Visitor = new PrintVisitor();
-        final PrintVisitor f2Visitor = new PrintVisitor();
-        operand.getF1().accept(f1Visitor);
-        operand.getF2().accept(f2Visitor);
-        this.soFar = f1Visitor.getSoFar() + " ^ " + f2Visitor.getSoFar();
+    public String visitSum(SumOperand operand) {
+        return operand.getF1().accept(this) + " + " + operand.getF2().accept(this);
     }
 
     @Override
-    public void visitSub(SubOperand operand) {
-        final PrintVisitor f1Visitor = new PrintVisitor();
-        final PrintVisitor f2Visitor = new PrintVisitor();
-        operand.getF1().accept(f1Visitor);
-        operand.getF2().accept(f2Visitor);
-        this.soFar = f1Visitor.getSoFar() + " - " + f2Visitor.getSoFar();
-    }
-
-    @Override
-    public void visitSum(SumOperand operand) {
-        final PrintVisitor f1Visitor = new PrintVisitor();
-        final PrintVisitor f2Visitor = new PrintVisitor();
-        operand.getF1().accept(f1Visitor);
-        operand.getF2().accept(f2Visitor);
-        this.soFar = f1Visitor.getSoFar() + " + " + f2Visitor.getSoFar();
-    }
-
-    @Override
-    public void visitNumber(Number operand) {
+    public String visitNumber(Number operand) {
         final Double number = operand.getNumber();
         if(number % 1 == 0) {
-            this.soFar = ((Integer) number.intValue()).toString();
+            return ((Integer) number.intValue()).toString();
         }else{
-           this.soFar = number.toString();
+           return number.toString();
         }
     }
 
     @Override
-    public void visitVariable(Variable operand) {
-        this.soFar = operand.getVariable();
+    public String visitVariable(Variable operand) {
+        return operand.getVariable();
     }
 
-    public String getSoFar() {
-        return this.soFar;
-    }
 }
