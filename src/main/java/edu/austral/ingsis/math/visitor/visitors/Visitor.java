@@ -14,4 +14,5 @@ public interface Visitor<T> {
     T visitSum(SumOperand operand);
     T visitNumber(Number operand);
     T visitVariable(Variable operand);
+    T visitRoot(RootOperand operand);
 }

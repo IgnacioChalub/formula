@@ -56,4 +56,9 @@ public class PrintVisitor implements Visitor<String> {
         return operand.getVariable();
     }
 
+    @Override
+    public String visitRoot(RootOperand operand) {
+        return "(" + operand.getF1().accept(this) + ")√" + operand.getF1().accept(this);
+    }
+
 }

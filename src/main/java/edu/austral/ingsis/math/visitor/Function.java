@@ -1,7 +1,6 @@
 package edu.austral.ingsis.math.visitor;
 
-import edu.austral.ingsis.math.visitor.visitors.Visitor;
+import edu.austral.ingsis.math.visitor.visitables.Visitable;
 
-public interface Function {
-    <T> T accept(Visitor<T> visitor);
+public interface Function extends Visitable {
 }

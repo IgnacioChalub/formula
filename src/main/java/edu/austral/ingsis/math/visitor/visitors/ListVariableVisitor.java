@@ -51,7 +51,6 @@ public class ListVariableVisitor implements Visitor<List<String>>{
     @Override
     public List<String> visitSum(SumOperand operand) {
         return Stream.concat(operand.getF1().accept(this).stream(), operand.getF2().accept(this).stream()).collect(Collectors.toList());
-
     }
 
     @Override
@@ -62,6 +61,11 @@ public class ListVariableVisitor implements Visitor<List<String>>{
     @Override
     public List<String> visitVariable(Variable operand) {
         return List.of(operand.getVariable());
+    }
+
+    @Override
+    public List<String> visitRoot(RootOperand operand) {
+        return Stream.concat(operand.getF1().accept(this).stream(), operand.getF2().accept(this).stream()).collect(Collectors.toList());
     }
 
 }

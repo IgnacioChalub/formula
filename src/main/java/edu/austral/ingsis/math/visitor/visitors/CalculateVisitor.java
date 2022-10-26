@@ -60,4 +60,9 @@ public class CalculateVisitor implements Visitor<Double> {
         return this.variableValues.get(operand.getVariable());
     }
 
+    @Override
+    public Double visitRoot(RootOperand operand) {
+       return Math.pow(operand.getF1().accept(this), 1/operand.getF2().accept(this));
+    }
+
 }
